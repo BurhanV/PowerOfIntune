@@ -29,6 +29,13 @@ if (!(Test-Path $logDir)) {
         attrib +h $logDir
     } catch {}
 }
+
+# Delete log files older than 2 days
+Get-ChildItem -Path $logDir -Filter *.log -File -ErrorAction SilentlyContinue | Where-Object {
+    $_.LastWriteTime -lt (Get-Date).AddDays(-2)
+} | Remove-Item -Force -ErrorAction SilentlyContinue
+
+#logging function
 function Write-Log {
     param ([string]$message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -39,6 +46,7 @@ function Write-Log {
     }
 }
 
+#Main Script Logic
 try {
     $session = (Get-CimInstance Win32_ComputerSystem).UserName
     if (-not $session) {
