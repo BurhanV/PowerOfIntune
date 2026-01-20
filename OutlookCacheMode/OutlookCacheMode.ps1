@@ -72,7 +72,7 @@ try {
 
     Write-Log "System drive size: $DiskGB GB"
 
-    if ($DiskGB -le 40) {
+    if ($DiskGB -le 128) {
         Write-Log "Disk size <= 128GB. Requirement not met. Exiting."
         exit 0
     }
