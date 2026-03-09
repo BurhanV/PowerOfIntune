@@ -6,7 +6,7 @@
     It logs the top 20 largest files and top 20 largest folders, excluding specified system directories.
 .NOTES
     File StorageDetection.ps1
-    2024-06-10
+    2026-02-10
     Version 1.0
 .AUTHOR
     Burhan Vejalpurwala
@@ -33,8 +33,8 @@ $ExcludedPaths = @(
 $CriticalFreeSpaceGB = 10 # GB
 
 # Log path
-$LogRoot = "C:\Users\Public"
-$LogFolder = Join-Path $LogRoot "DiskScanLogs"
+$LogRoot = "C:\Users\Public" # Change if you want logs in a different location
+$LogFolder = Join-Path $LogRoot "DiskScanLogs" # Logs will be stored in C:\Users\Public\DiskScanLogs
 
 if (-not (Test-Path $LogFolder)) {
     New-Item -Path $LogFolder -ItemType Directory -Force | Out-Null
